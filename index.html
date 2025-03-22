@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dubai to the Stars</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-dark: #211d0f;
+      --accent-gold: #d2a57e;
+      --muted-gray: #768896;
+      --metal-gray: #4a5057;
+      --earth-brown: #886642;
+      --concrete: #41443e;
+    }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: var(--primary-dark);
+      color: white;
+      margin: 0;
+    }
+    header {
+      text-align: center;
+      background-color: var(--concrete);
+      padding-bottom: 30px;
+    }
+    header img {
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      object-fit: cover;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-top: -60px;
+      color: white;
+      text-shadow: 2px 2px 6px #000;
+    }
+    header button {
+      padding: 12px 24px;
+      background: var(--accent-gold);
+      border: none;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      color: black;
+      font-size: 1rem;
+      margin-top: 20px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    header button:hover {
+      background: var(--earth-brown);
+      transform: scale(1.05);
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background-color: var(--concrete);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(210, 165, 126, 0.2);
+      margin-top: 30px;
+      display: none;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+    select, input[type="date"], button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+      font-family: 'Orbitron', sans-serif;
+    }
+    button {
+      background-color: var(--accent-gold);
+      color: black;
+      font-weight: bold;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: var(--earth-brown);
+      transform: scale(1.05);
+    }
+    .booking {
+      background-color: var(--metal-gray);
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border-left: 4px solid white;
+    }
+    .section-title {
+      margin-top: 40px;
+      border-bottom: 1px solid white;
+      padding-bottom: 10px;
+      color: white;
+    }
+    .subtext {
+      color: var(--muted-gray);
+      font-size: 14px;
+    }
+    .tips {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: var(--metal-gray);
+      border-radius: 10px;
+      border: 1px solid var(--accent-gold);
+    }
+    .tips h2 {
+      color: white;
+      margin-top: 0;
+    }
+    .tips ul {
+      padding-left: 20px;
+    }
+    .tips li {
+      margin-bottom: 10px;
+      color: var(--muted-gray);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Dubai.png" alt="Futuristic Dubai">
+    <h1>Dubai to the Stars</h1>
+    <button onclick="document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });">Start Reservation</button>
+  </header>
+
+  <div class="container">
+    <p class="subtext">The future of travel is here. Book trips from Dubai to space hotels, lunar resorts, and beyond.</p>
+
+    <div class="form-group">
+      <label for="departureDate">Departure Date:</label>
+      <input type="date" id="departureDate">
+    </div>
+    <div class="form-group">
+      <label for="destination">Destination:</label>
+      <select id="destination">
+        <option>Orbital Station Alpha</option>
+        <option>Lunar Hotel Serenity</option>
+        <option>Mars Habitat One</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="seatClass">Seat Class:</label>
+      <select id="seatClass">
+        <option>Economy Shuttle</option>
+        <option>Luxury Cabin</option>
+        <option>VIP Zero-Gravity</option>
+      </select>
+    </div>
+    <button onclick="bookTrip()">Book My Space Trip</button>
+
+    <h2 class="section-title">My Bookings</h2>
+    <div id="bookings"></div>
+
+    <div class="tips">
+      <h2>Travel Tips & Cultural Notes</h2>
+      <ul>
+        <li>Pack lightly and efficiently. / احزم أمتعتك بخفة وكفاءة.</li>
+        <li>Arabic coffee and dates are traditionally served as a welcome. / تُقدم القهوة العربية والتمر تقليديًا للترحيب.</li>
+        <li>Respect prayer schedules – stations offer direction-adjusted prayer pods. / احترم أوقات الصلاة - تتوفر في المحطات كبائن مخصصة مزودة باتجاه القبلة.</li>
+        <li>Light Emirati attire is appropriate and adapted for space conditions. / اللباس الإماراتي الخفيف مناسب ومعدل لظروف الفضاء.</li>
+        <li>Fragrance-enhanced rooms with oud are available. / تتوفر غرف معطرة بالعود حسب الطلب.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const travelTips = {
+      "Economy Shuttle": "Pack light and prepare for shared seating. / أحزم أمتعتك بخفة واستعد للمقاعد المشتركة.",
+      "Luxury Cabin": "Enjoy private viewing ports and gourmet meals. / استمتع بنوافذ مشاهدة خاصة ووجبات فاخرة.",
+      "VIP Zero-Gravity": "Get ready for immersive zero-G entertainment. / استعد لتجربة ترفيهية منعدمة الجاذبية."
+    };
+
+    const pricingInfo = {
+      "Economy Shuttle": "AED 50,000 – Shared cabin, basic meals, no extra baggage",
+      "Luxury Cabin": "AED 150,000 – Private suite, panoramic views, gourmet space meals",
+      "VIP Zero-Gravity": "AED 300,000 – Zero-G bubble pod, exclusive activities, private AI butler"
+    };
+
+    function bookTrip() {
+      const departureDate = document.getElementById('departureDate').value;
+      const destination = document.getElementById('destination').value;
+      const seatClass = document.getElementById('seatClass').value;
+      const bookingsDiv = document.getElementById('bookings');
+
+      if (!departureDate) {
+        alert("Please select a departure date.");
+        return;
+      }
+
+      const launchDate = new Date(departureDate);
+      const now = new Date();
+      const timeDiff = launchDate.getTime() - now.getTime();
+      const daysLeft = Math.max(Math.ceil(timeDiff / (1000 * 60 * 60 * 24)), 0);
+
+      const booking = document.createElement('div');
+      booking.className = 'booking';
+      booking.innerHTML = `
+        <p><strong>Destination:</strong> ${destination}</p>
+        <p><strong>Departure:</strong> ${departureDate}</p>
+        <p><strong>Seat Class:</strong> ${seatClass}</p>
+        <p><strong>Countdown:</strong> ${daysLeft} day(s)</p>
+        <p><strong>Travel Tip:</strong> ${travelTips[seatClass]}</p>
+        <div class="pricing">
+          <h3>Travel Package Pricing</h3>
+          <p>${pricingInfo[seatClass]}</p>
+        </div>
+      `;
+
+      bookingsDiv.appendChild(booking);
+    }
+
+    window.onload = () => {
+      document.querySelector('.container').style.display = 'block';
+    };
+  </script>
+</body>
+</html>
