@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Space Travel Booking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0c0f1f;
+      color: white;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #00d9ff;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    select, input[type="date"], button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #00d9ff;
+      color: black;
+      font-weight: bold;
+      border: none;
+    }
+    .booking {
+      background-color: #1e2235;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 Space Travel Booking</h1>
+    <div class="form-group">
+      <label for="departureDate">Departure Date:</label>
+      <input type="date" id="departureDate">
+    </div>
+    <div class="form-group">
+      <label for="destination">Destination:</label>
+      <select id="destination">
+        <option>Orbital Station Alpha</option>
+        <option>Lunar Hotel Serenity</option>
+        <option>Mars Habitat One</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="seatClass">Seat Class:</label>
+      <select id="seatClass">
+        <option>Economy Shuttle</option>
+        <option>Luxury Cabin</option>
+        <option>VIP Zero-Gravity</option>
+      </select>
+    </div>
+    <button onclick="bookTrip()">Book Trip</button>
+
+    <h2>🧳 My Bookings</h2>
+    <div id="bookings"></div>
+  </div>
+
+  <script>
+    const travelTips = {
+      "Economy Shuttle": "Pack light and prepare for shared seating.",
+      "Luxury Cabin": "Enjoy private viewing ports and gourmet meals.",
+      "VIP Zero-Gravity": "Get ready for immersive zero-G entertainment."
+    };
+
+    function bookTrip() {
+      const departureDate = document.getElementById('departureDate').value;
+      const destination = document.getElementById('destination').value;
+      const seatClass = document.getElementById('seatClass').value;
+      const bookingsDiv = document.getElementById('bookings');
+
+      if (!departureDate) {
+        alert("Please select a departure date.");
+        return;
+      }
+
+      const countdown = Math.floor((new Date(departureDate) - new Date()) / (1000 * 60 * 60 * 24));
+
+      const booking = document.createElement('div');
+      booking.className = 'booking';
+      booking.innerHTML = `
+        <p><strong>Destination:</strong> ${destination}</p>
+        <p><strong>Departure:</strong> ${departureDate}</p>
+        <p><strong>Seat Class:</strong> ${seatClass}</p>
+        <p><strong>Countdown:</strong> ${countdown} days</p>
+        <p><strong>Travel Tip:</strong> ${travelTips[seatClass]}</p>
+      `;
+
+      bookingsDiv.appendChild(booking);
+    }
+  </script>
+</body>
+</html>
